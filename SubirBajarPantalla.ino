@@ -32,6 +32,7 @@ void setup() {
   pinMode(SALIDA_1, OUTPUT);
   pinMode(SALIDA_2, OUTPUT);
   pinMode(ENTRADA_1, INPUT);
+  pinMode(ENTRADA_2, INPUT);
 
   digitalWrite(SALIDA_1, LOW);
   digitalWrite(SALIDA_2, LOW);
@@ -45,6 +46,7 @@ void hacerRutina(int salida) {
 }
 
 bool entrada2Low = false;
+bool highSalida1 = false;
 
 void loop() {
   unsigned long currentMillis = millis();  // Get the current time
@@ -58,12 +60,16 @@ void loop() {
     delay(interval);
     digitalWrite(SALIDA_2, LOW);
     entrada2Low = false;
+    highSalida1 = true;
   } else if(digitalRead(ENTRADA_2) == HIGH) {
     entrada2Low = true;
 
-    digitalWrite(SALIDA_1, HIGH);
-    delay(interval);
-    digitalWrite(SALIDA_1, LOW);
+    if (highSalida1) {
+      digitalWrite(SALIDA_1, HIGH);
+      delay(interval);
+      digitalWrite(SALIDA_1, LOW);
+      highSalida1 = false;
+    }
 
     if (digitalRead(ENTRADA_1) == LOW) {
       digitalWrite(SALIDA_1, LOW);
