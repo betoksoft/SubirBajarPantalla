@@ -25,7 +25,7 @@ const int ENTRADA_2 = 3;
 int TOGGLE_SALIDA = SALIDA_2;
 
 unsigned long previousMillisEntrada2 = 0;  // Store the last time the LED was updated
-const long interval = 5000;       // Interval at which to wait (in milliseconds)
+const long interval = 20000;       // Interval at which to wait (in milliseconds)
 
 void setup() {
   // put your setup code here, to run once:
